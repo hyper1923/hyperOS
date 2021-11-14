@@ -5,6 +5,11 @@
 #define FREE_MEMORY 0x10000
 int freeMemory = FREE_MEMORY;
 
+
+void initializeMemory(){
+    freeMemory = FREE_MEMORY;
+}
+
 void* memset(void* dest, unsigned char val, int count){
     unsigned char* destC = (unsigned char*)dest;
     int i;

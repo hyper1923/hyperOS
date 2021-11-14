@@ -14,6 +14,7 @@ public:
 
 extern "C"{
 	int _HSTATUS_MAIN(){
+		initializeMemory();
 		Kernel* kernel = (Kernel*)malloc(sizeof(Kernel));
 		Process* console = (Process*)malloc(sizeof(console));
 		kernel->processes.push_back(console);
