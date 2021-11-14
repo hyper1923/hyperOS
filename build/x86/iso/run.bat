@@ -1,0 +1,1 @@
+qemu-system-i386 \\wsl.localhost\Ubuntu\home\hyper1923\hyperos\build\x86\iso\hyperOS.iso
