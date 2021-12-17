@@ -7,4 +7,4 @@ class Process{
 public:
     virtual void Init() = nullptr;
     virtual void Loop() = nullptr;
-};
+}; 

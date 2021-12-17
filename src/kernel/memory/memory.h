@@ -26,3 +26,4 @@ void* malloc(int size){
     freeMemory += size;
     return address;
 }
+
