@@ -1,25 +1,15 @@
-#include "acpi/acpi.h"
-#include "memory/memory.h"
-#include "../lib/iostream.h"
-#include "process/process.h"
+#include "../hyperOS.h"
 
-
-class Kernel{
-public:
-	Acpi* acpi;
-	std::vector<Process*> processes;
-};
-
+void InitKernel(){
+	initializeMemory();
+	Kernel* kernel = (Kernel*)malloc(sizeof(Kernel));
+	kernel->init();
+}
 
 
 extern "C"{
 	int _HSTATUS_MAIN(){
-		initializeMemory();
-		Kernel* kernel = (Kernel*)malloc(sizeof(Kernel));
-		Process* console = (Process*)malloc(sizeof(console));
-		kernel->processes.push_back(console);
-		kernel->acpi = (Acpi*)malloc(sizeof(Acpi*));
-		kernel->acpi->Reboot();
-		return 123;
+		InitKernel();
+		return 0;
 	}
 }

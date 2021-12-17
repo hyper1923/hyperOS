@@ -1,14 +1,17 @@
 #pragma once
 #include "../hyperOS.h"
 #include "../kernel/memory/memory.h"
-
-
+#include "../kernel/acpi/vga.h"
 #define nullptr 0
 #define NULL 0
 
 
 
 namespace std{
+    VGA vga_driver;
+    void printf(const char* data){
+        vga_driver.printf(data);
+    }
     template <typename T>
     class vector{
     public:
@@ -24,7 +27,9 @@ namespace std{
         }
 
         T& operator[](int _a){
+            if(*elements[_a] != 0){
                 return elements[_a];
+            }
         }
 
         int size(){
@@ -32,7 +37,7 @@ namespace std{
         }
 
     private:
-        int _size = 0;
+        int _size = -1;
         T* elements;
     }; 
 }
