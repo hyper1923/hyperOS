@@ -7,7 +7,7 @@ class ProcessManager{
 public:
 
     bool Init(){
-        std::SYSTEM::KernelPrint("Process Manager has started.");
+        std::printLine("Process Manager has started.");
         return true;
     }
 
@@ -17,7 +17,7 @@ public:
     void AddProcess(T t){
         processList.push_back(&t);
         t.SetProcessId(processList.size());
-        if(debugMode == false){
+        if(debugMode == true){
             std::printIntegerDataLine("Process added by SYSTEM: ", t.GetProcessId());
             std::printIntegerDataLine("Free Memory: ", freeMemory);
         }

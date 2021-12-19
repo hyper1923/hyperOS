@@ -1,30 +1,27 @@
 #pragma once
 #include "../hyperOS.h"
-
-
+#include "fs/vfs.h"
 
 class Windows : public Process{
 public:
 	void Init(){
-		std::printLine("Hello World from Windows 12!");
+		//NULL
 	}
 
 	void Loop(){
-		
-		std::printLine("Hello World from Windows 12!");
+		//NULL
 	}
 };
 
 
 class KernelPanic : public Process{
 public:
-	bool GiveError(int ErrorType, const char* Message){
+	bool GiveError(){
 		std::printLine("Kernel Panic!");
 		while (true)
 		{
 			/* code */
 		}
-		
 		return true;
 	}
 };
@@ -33,29 +30,28 @@ class Kernel{
 public:
 	Acpi* acpi;
 	ProcessManager* processManager;
+	VFS* vfs;
 
 	void init(){
-		std::SYSTEM::KernelPrint("Starting kernel...");
+		std::printLine("Initializing Memory.");
+		InitializeMemory();
+		std::printLine("Starting kernel...");
 		LoadModules();
 		processManager->AddProcess(Windows());
 		processManager->AddProcess(KernelPanic());
-		std::SYSTEM::KernelPrint("Started kernel.");
+		std::printLine("Started kernel.");
 		sysBootedUp = true;
-		std::printLine((const char*)processManager);
-		while (sysBootedUp)
-		{
-			/* code */
-			processManager->Loop();
-		}
 	}
 
 
 	bool LoadModules(){
-		std::SYSTEM::KernelPrint("Loading modules...");
+		std::printLine("Loading modules...");
 		acpi = (Acpi*)malloc(sizeof(Acpi));
+		vfs = (VFS*)malloc(sizeof(VFS));
+		vfs->InitVFS();
 		processManager = (ProcessManager*)malloc(sizeof(ProcessManager));
 		processManager->Init();
-		std::SYSTEM::KernelPrint("Loaded modules.");
+		std::printLine("Loaded modules.");
 		return true;
 	}
 

@@ -37,17 +37,28 @@ namespace std{
         vga_driver.printf(ENDL);
     }
 
-
-    class SYSTEM{
-    public:
-        static void KernelPrint(const char* data){
-            vga_driver.printf("[SYSTEM] ");
-            vga_driver.printf(data);
-            vga_driver.printf(ENDL);
+    void printBoolData(const char* data, bool _data){
+        if(_data == 1){
+            printIn(data);
+            printIn("true");
+        } else{
+            printIn(data);
+            printIn("false");
         }
-    private:
-        uint32_t permissionId = 5817;
-    };
+    }
+
+    void printBoolDataLine(const char* data, bool _data){
+        if(_data == 1){
+            printIn(data);
+            printIn("true");
+            printIn(ENDL);
+        } else{
+            printIn(data);
+            printIn("false");
+            printIn(ENDL);
+        }
+    }
+
 
     template <typename T>
     class vector{

@@ -2,6 +2,16 @@
 #include "../../hyperOS.h"
 
 
+class MemoryManager{
+public:
+    void* memset(void* destination , unsigned char value, int count){
+        
+    }
+private:
+    int freeMemory;
+    int maxMemory;
+};
+
 #define FREE_MEMORY 0x10000
 int freeMemory = FREE_MEMORY;
 

@@ -111,6 +111,13 @@ public:
         
     }
 
+
+    void clear_screen(){
+        for(int i = (int)VGA_MEMORY; VGA_MEMORY + 4000; i++){
+            *((char*)i) = 0;
+        }
+    }
+
     void print_char(char s)
     {
         cursorPosition.x++;
