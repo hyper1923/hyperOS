@@ -1,12 +1,12 @@
 #pragma once
-
+#include "../../hyperOS.h"
 
 
 #define FREE_MEMORY 0x10000
 int freeMemory = FREE_MEMORY;
 
 
-void initializeMemory(){
+void InitializeMemory(){
     freeMemory = FREE_MEMORY;
 }
 

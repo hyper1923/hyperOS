@@ -1,5 +1,4 @@
 #pragma once
-#include "../../hyperOS.h"
 
 class Communucation{
 public:

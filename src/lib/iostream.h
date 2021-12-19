@@ -1,44 +1,79 @@
 #pragma once
 #include "../hyperOS.h"
-#include "../kernel/memory/memory.h"
-#include "../kernel/acpi/vga.h"
 #define nullptr 0
 #define NULL 0
+#define ENDL (const char*)"\n"
 
 
 
 namespace std{
+
+    void Sleep(int nanoseconds){
+		while(nanoseconds < 1000 * 100){
+			nanoseconds++;
+		}
+	}
     VGA vga_driver;
-    void printf(const char* data){
+    void printIn(const char* data){
         vga_driver.printf(data);
     }
+
+    void printInteger(int _data){
+        vga_driver.printInteger(_data);
+    }
+
+    void printLine(const char *data){
+        vga_driver.printf(data);
+        vga_driver.printf(ENDL);
+    }
+
+    void printIntegerData(const char* data, int _data){
+        vga_driver.printf(data);
+        vga_driver.printInteger(_data);
+    }
+    void printIntegerDataLine(const char* data, int _data){
+        vga_driver.printf(data);
+        vga_driver.printInteger(_data);
+        vga_driver.printf(ENDL);
+    }
+
+
+    class SYSTEM{
+    public:
+        static void KernelPrint(const char* data){
+            vga_driver.printf("[SYSTEM] ");
+            vga_driver.printf(data);
+            vga_driver.printf(ENDL);
+        }
+    private:
+        uint32_t permissionId = 5817;
+    };
+
     template <typename T>
     class vector{
     public:
         void push_back(T element){
             _size++;
             T* copy = elements;
-            elements = (T*)malloc(sizeof(T));
+            elements = (T*)malloc(_size * sizeof(T));
             elements[_size-1] = element;
             for(int i = 0; i < _size - 1; i++){
-                elements[i-1] = copy[i];
+                elements[i] = copy[i];
             } 
             return;
         }
 
         T& operator[](int _a){
-            if(*elements[_a] != 0){
-                return elements[_a];
-            }
+            return elements[_a];
         }
 
         int size(){
-            return _size -1;
+            return _size;
         }
 
     private:
-        int _size = -1;
-        T* elements;
+        int _size = 0;
+        T* elements = (T*)malloc(sizeof(T));
     }; 
 }
 

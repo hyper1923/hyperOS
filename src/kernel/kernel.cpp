@@ -1,15 +1,15 @@
 #include "../hyperOS.h"
 
-void InitKernel(){
-	initializeMemory();
-	Kernel* kernel = (Kernel*)malloc(sizeof(Kernel));
-	kernel->init();
+void ___Main(){
+	InitializeMemory();
+	Kernel kernel;
+	kernel.init();
 }
 
 
 extern "C"{
 	int _HSTATUS_MAIN(){
-		InitKernel();
+		___Main();
 		return 0;
 	}
 }

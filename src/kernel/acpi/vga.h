@@ -1,7 +1,19 @@
 #pragma once
 #include "../../hyperOS.h"
+
 #define VGA_MEMORY (char*)0xB8000
 #define VGA_WIDTH 80
+
+
+class ScreenInfo{
+public:
+    ScreenInfo(){
+        
+    }
+    int SCREEN_X;
+    int SCREEN_Y;
+}; 
+
 
 class CursorPosition {
 public:
@@ -43,6 +55,62 @@ public:
             }
         }
     }
+
+    void printInteger(int _data){  
+        int rem;
+        int ones;
+        int tens;
+        int hundreds;
+        int thousands;
+        int tensThousands;
+
+        int size;
+        int sizeTester = (int)_data;
+        while(sizeTester / 10 > 0){
+            sizeTester /= 10;
+            size++;
+        }
+        for (int i = 0; i < 5; i++) 
+        {
+            rem = _data %10;
+            _data = _data /10;
+
+            if(i == 0)
+                ones = rem;
+            else if(i == 1)
+                tens = rem;
+            else if(i == 2)
+                hundreds = rem;
+            else if(i == 3)
+                thousands = rem;
+            else if(i == 4)
+                tensThousands = rem;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            switch (i)
+            {
+            case 0:
+                print_char('0' + tensThousands);
+                break;
+            case 1:
+                print_char('0' + thousands);
+                break;
+            case 2:
+                print_char('0' + hundreds);
+                break;
+            case 3:
+                print_char('0' + tens);
+                break;
+            case 4:
+                print_char('0' + ones);
+                break;
+            }
+        }
+        
+    }
+
     void print_char(char s)
     {
         cursorPosition.x++;
