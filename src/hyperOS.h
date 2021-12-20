@@ -9,6 +9,4 @@ typedef unsigned int uint32_t;
 #include "kernel/acpi/vga.h"
 #include "kernel/memory/memory.h"
 #include "lib/iostream.h"
-#include "kernel/process/process.h"
-#include "kernel/process_manager.h"
 #include "kernel/kernel.h"
